@@ -12,7 +12,7 @@ function handleHidden() {
 
 browser.devtools.panels.create(
   "Rhythm",
-  "/icons/music-note-list(white).png",
+  "/assets/icons/music-note-list(white).png",
   "/devtools/panel/panel.html"
 ).then((newPanel) => {
   newPanel.onShown.addListener(handleShown);

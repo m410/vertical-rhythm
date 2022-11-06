@@ -15,95 +15,98 @@ window.verticalRhythm = (function() {
     },
     grid: {
       count: 12,
-      gutter: '1rem'
+      gutter: '1rem',
     },
-    marginTop: '1rem'
+    marginTop: '0',
+    boxColor: 'tomato',
+    boxOpacity: .35
   };
 
-
-const styleTemplate = `
-    :root {
-      --vr-gutter: ${settings.grid.gutter};
-      --vr-columns: ${settings.grid.count};
-      --vr-break-xsmall: ${settings.breakpoints.xSmall}px;
-      --vr-break-small: ${settings.breakpoints.small}px;
-      --vr-break-medium: ${settings.breakpoints.medium}px;
-      --vr-break-large: ${settings.breakpoints.large}px;
-      --vr-break-xlarge: ${settings.breakpoints.xLarge}px;
-      --vr-break-xxlarge: ${settings.breakpoints.xxLarge}px;
-      --vr-top: ${settings.marginTop};
-      --vr-box-color: tomato;
-    }
+function makeTemplate(conf) {
+  return `
+  :root {
+    --vr-gutter: ${conf.grid.gutter};
+    --vr-columns: ${conf.grid.count};
+    --vr-break-xsmall: ${conf.breakpoints.xSmall}px;
+    --vr-break-small: ${conf.breakpoints.small}px;
+    --vr-break-medium: ${conf.breakpoints.medium}px;
+    --vr-break-large: ${conf.breakpoints.large}px;
+    --vr-break-xlarge: ${conf.breakpoints.xLarge}px;
+    --vr-break-xxlarge: ${conf.breakpoints.xxLarge}px;
+    --vr-top: ${conf.marginTop};
+    --vr-box-color: ${conf.boxColor};
+    --vr-box-opacity: ${conf.boxOpacity};
+  }
+  .rhythm-vertical {
+    margin: 0 auto;
+    position: absolute;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    top: var(--vr-top);
+    left: 0;
+    right: 0;
+    height: 100%;
+    max-width: var(--vr-break-xsmall);
+    z-index: 999999;
+    opacity: var(--vr-box-opacity);
+    padding: 0 calc(var(--vr-gutter) * .5);
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAEKADAAQAAAABAAAAEAAAAAAXnVPIAAAAHGlET1QAAAACAAAAAAAAAAgAAAAoAAAACAAAAAgAAABEJwSU2wAAABBJREFUOBFiYBgFoyHAwAAAAAD//7LY/4IAAAAgSURBVGNgGAXDJAQSgP44gAXvB4rB8D4gG4b3AtlwDABgCguM9D4iLAAAAABJRU5ErkJggg==");
+    background-repeat: repeat;
+  }
+  .rhythm-vertical>.beat {
+    flex: 1 0 auto;
+    height: 100%;
+    opacity: var(--vr-box-opacity);
+    padding-right: calc(var(--vr-gutter) * .5);
+    padding-left: calc(var(--vr-gutter) * .5);
+  }
+  .rhythm-vertical>.beat>.box {
+    background-color: var(--vr-box-color);
+    width: 100%;
+    height: 100%;
+  }
+  @media only screen and (max-width: ${conf.breakpoints.small}px) {
     .rhythm-vertical {
-      margin: 0 auto;
-      position: absolute;
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: space-evenly;
-      align-items: stretch;
-      top: var(--vr-top);
-      left: 0;
-      right: 0;
-      height: 100%;
-      max-width: var(--vr-break-xsmall);
-      z-index: 999999;
-      opacity: 0.35;
-      padding: 0 calc(var(--vr-gutter) * .5);
-      background-image: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzI0cHgnIHN0eWxlPSdmaWxsLXJ1bGU6bm9uemVybztjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46cm91bmQ7JyB4bWxuczp4bGluaz0naHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluaycgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB4bWw6c3BhY2U9J3ByZXNlcnZlJyB3aWR0aD0nMTAwJScgdmlld0JveD0nMCAwIDQgMjQnPjxnIGlkPSdtYWluX2dyb3VwJz4gPHBhdGggZD0nTS0wKzBMNCswTDQrMTdMLTArMTdMLTArMFonIG9wYWNpdHk9JzAuMDgnIGZpbGw9JyMwMjlhNTgnLz48cGF0aCBkPSdNLTArMThMNCsxOEw0KzI0TC0wKzI0TC0wKzE4Wicgb3BhY2l0eT0nMC4wOCcgZmlsbD0nIzAwNDYyOCcvPjxwYXRoIGQ9J00tMCsxN0w0KzE3TDQrMThMLTArMThMLTArMTdaJyBvcGFjaXR5PScwLjQwJyBmaWxsPScjMDAwNDAyJy8+PC9nPjwvc3ZnPg==");
-      background-repeat: repeat;
+      max-width: calc(var(--vr-break-small) - 40px);
     }
-    .rhythm-vertical>.beat {
-      flex: 1 0 auto;
-      height: 100%;
-      opacity: 0.25;
-      padding-right: calc(var(--vr-gutter) * .5);
-      padding-left: calc(var(--vr-gutter) * .5);
-    }
-    .rhythm-vertical>.beat>.box {
-      background-color: var(--vr-box-color);
-      width: 100%;
-      height: 100%;
-    }
-    @media only screen and (max-width: ${settings.breakpoints.small}px) {
-      .rhythm-vertical {
-        max-width: calc(var(--vr-break-small) - 40px);
-      }
-    }
+  }
 
-    @media only screen and (min-width: ${settings.breakpoints.medium}px) {
-      .rhythm-vertical {
-        max-width: var(--vr-break-medium);
-      }
+  @media only screen and (min-width: ${conf.breakpoints.medium}px) {
+    .rhythm-vertical {
+      max-width: var(--vr-break-medium);
     }
+  }
 
-    @media only screen and (min-width: ${settings.breakpoints.large}px) {
-      .rhythm-vertical {
-        max-width: var(--vr-break-large);
-      }
+  @media only screen and (min-width: ${conf.breakpoints.large}px) {
+    .rhythm-vertical {
+      max-width: var(--vr-break-large);
     }
+  }
 
-    @media only screen and (min-width: ${settings.breakpoints.xLarge}px) {
-      .rhythm-vertical {
-        max-width: var(--vr-break-xlarge);
-      }
-    } 
-    @media only screen and (min-width: ${settings.breakpoints.xxLarge}px) {
-      .rhythm-vertical {
-        max-width: calc(var(--vr-break-xxlarge) - 40px);
-      }
-    } 
+  @media only screen and (min-width: ${conf.breakpoints.xLarge}px) {
+    .rhythm-vertical {
+      max-width: var(--vr-break-xlarge);
+    }
+  } 
+  @media only screen and (min-width: ${conf.breakpoints.xxLarge}px) {
+    .rhythm-vertical {
+      max-width: calc(var(--vr-break-xxlarge) - 40px);
+    }
+  } 
 `;
-
+}
 
   function reset() {
-    console.log('reset');
 
     if(settings.showHide) {
       const style = document.createElement('style');
       style.id = ID;
-      style.textContent = styleTemplate;
+      const template = makeTemplate(settings);
+      console.log('template', template);
+      style.textContent = template;
       document.body.appendChild(style);
-  
   
       const mask = document.createElement('div');
       mask.id = MASK_ID;
@@ -130,7 +133,6 @@ const styleTemplate = `
           styleElem.parentNode.removeChild(styleElem);
         }
 
-
         if(maskElem) {
           maskElem.parentNode.removeChild(maskElem);
         }
@@ -139,6 +141,7 @@ const styleTemplate = `
 
   return {
     update: function(newSettings) {
+      console.log('setting', newSettings);
         settings = newSettings;
         reset();
     }

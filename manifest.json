@@ -6,7 +6,7 @@
   "author": "Michael Fortin",
   "homepage_url": "https://github.com/m410/v-rhythm",
   "icons": {
-    "48": "icons/music-note-list-48.png"
+    "48": "assets/icons/music-note-list-48.png"
   },
   
   "background": {
