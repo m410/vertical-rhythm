@@ -13,7 +13,6 @@ function handleResult(result) {
   }
 }
 
-
 const rhythmSettings = {
   showHide: false,
   breakpoints: {
@@ -28,11 +27,11 @@ const rhythmSettings = {
     count: 12,
     gutter: '1rem',
   },
-  marginTop: '0',
+  marginTop: '1rem',
   boxColor: 'tomato',
-  boxOpacity: .35
+  boxOpacity: .35,
+  lineHeight: '27px'
 };
-
 
 function pushSettings() {
   const newSettingsJson = JSON.stringify(rhythmSettings);
@@ -50,14 +49,12 @@ function out(msg, data) {
   }).then(handleResult);
 }
 
-
 const showHide = document.getElementById('show-hide');
 showHide.value = rhythmSettings.showHide;
 showHide.addEventListener('change', ($event) => {
   rhythmSettings.showHide = !rhythmSettings.showHide;
   pushSettings();
 });  
-
 
 const breakXSmall = document.getElementById('break-1');
 breakXSmall.setAttribute('value', rhythmSettings.breakpoints.xSmall);
@@ -126,5 +123,12 @@ const marginTop = document.getElementById('margin-top');
 marginTop.value = rhythmSettings.marginTop;
 marginTop.addEventListener('change', ($event) => {
   rhythmSettings.marginTop = marginTop.value;
+  pushSettings();
+});  
+
+const lineHeight = document.getElementById('line-height');
+lineHeight.value = rhythmSettings.lineHeight;
+lineHeight.addEventListener('change', ($event) => {
+  rhythmSettings.lineHeight = lineHeight.value;
   pushSettings();
 });  
