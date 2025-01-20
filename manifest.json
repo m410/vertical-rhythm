@@ -1,27 +1,19 @@
 {
-  "version": "1.0",
-  "manifest_version": 2,
-  "description": "Adds a new panel to the developer tools. The panel contains buttons that demonstrate various basic features of the devtools API.",
-  "name": "vertical-rhythm",
-  "author": "Michael Fortin",
-  "homepage_url": "https://github.com/m410/v-rhythm",
-  "devtools_page": "devtools/rhythm-page.html",
-  "background": {
-    "scripts": [
-      "background/background.js"
+    "manifest_version": 3,
+    "name": "Vertical Rhythm",
+    "version": "1.0",
+    "description": "Add a vertical and horizantal spacing guide for layout",
+    "icons": {
+      "16": "assets/music-note-list.svg",
+      "32": "assets/music-note-list.svg",
+      "48": "assets/music-note-list.svg",
+      "128": "assets/music-note-list.svg"
+    },
+    "content_scripts": [
+      {
+        "js": ["content/vertical-rhythm.js"],
+        "matches": ["https://*/", "http://*/"]
+      }
     ]
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*/*"
-      ],
-      "js": [
-        "content/vertical-rhythm.js"
-      ]
-    }
-  ],
-  "permissions": [
-    "<all_urls>"
-  ]
-}
+  }
+  
