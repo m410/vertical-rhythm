@@ -154,8 +154,7 @@ const vr = document.createElement('vertical-rhythm')
 const body: HTMLElement = document.getElementsByTagName('body')[0]
 body.style.position = 'relative'
 body.appendChild(vr)
-let count = 0
 
 chrome.runtime.onMessage.addListener((request) => {
-  vr.setAttribute('visible', 'toggle-' + count++)
+  vr.setAttribute('visible', 'toggle')
 })

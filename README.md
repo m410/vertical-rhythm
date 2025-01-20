@@ -1,4 +1,4 @@
-# vertical-rhythm
+# Vertial Rhythm
 
 > a chrome extension tools built with Vite + Vanilla, and Manifest v3
 

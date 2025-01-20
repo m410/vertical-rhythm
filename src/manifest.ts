@@ -29,7 +29,7 @@ export default defineManifest({
       js: ['src/contentScript/index.ts'],
     },
   ],
-  // permissions: ['storage', 'activeTab'],
+  permissions: ['activeTab'],
   web_accessible_resources: [
     {
       resources: ['img/logo-16.png', 'img/logo-34.png', 'img/logo-48.png', 'img/logo-128.png'],
